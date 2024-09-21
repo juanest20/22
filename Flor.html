@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Girasol en Canvas</title>
+    <title>Agregar un Link con JavaScript</title>
     <style>
         body {
             display: flex;
@@ -12,78 +12,39 @@
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
         }
-        canvas {
-            border: 1px solid #000;
+        #enlace {
+            font-size: 20px;
+            color: blue;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <canvas id="girasolCanvas" width="400" height="400"></canvas>
+
+    <!-- El contenedor donde se añadirá el enlace -->
+    <div id="contenedor"></div>
 
     <script>
-        const canvas = document.getElementById('girasolCanvas');
-        const ctx = canvas.getContext('2d');
+        // Crear un nuevo elemento <a> para el enlace
+        const link = document.createElement('a');
 
-        // Dibujar el centro del girasol
-        function dibujarCentro() {
-            ctx.beginPath();
-            ctx.arc(200, 200, 50, 0, 2 * Math.PI); // Centro marrón
-            ctx.fillStyle = "#8B4513"; // Color marrón
-            ctx.fill();
-            ctx.closePath();
-        }
+        // Establecer el texto del enlace
+        link.textContent = 'Visita mi sitio web';
 
-        // Dibujar pétalos
-        function dibujarPetalos() {
-            const petalos = 20;
-            const radioExterno = 120;
-            const radioInterno = 50;
+        // Establecer la URL del enlace
+        link.href = 'https://www.canva.com/design/DAGRbT7L9aU/mOl_vJb0RAaytPESqivJmQ/edit?utm_content=DAGRbT7L9aU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton'; // Cambia a la URL que desees
 
-            for (let i = 0; i < petalos; i++) {
-                const angulo = (2 * Math.PI / petalos) * i;
-                const x = 200 + Math.cos(angulo) * radioInterno;
-                const y = 200 + Math.sin(angulo) * radioInterno;
+        // Opcional: hacer que el enlace se abra en una nueva pestaña
+        link.target = '_blank';
 
-                ctx.beginPath();
-                ctx.ellipse(x, y, 30, 60, angulo, 0, 2 * Math.PI);
-                ctx.fillStyle = "#FFD700"; // Amarillo para los pétalos
-                ctx.fill();
-                ctx.closePath();
-            }
-        }
+        // Agregar un id al enlace (opcional)
+        link.id = 'enlace';
 
-        // Dibujar tallo
-        function dibujarTallo() {
-            ctx.beginPath();
-            ctx.moveTo(200, 250);
-            ctx.lineTo(200, 400);
-            ctx.lineWidth = 10;
-            ctx.strokeStyle = "#228B22"; // Color verde del tallo
-            ctx.stroke();
-            ctx.closePath();
-        }
-
-        // Dibujar hojas
-        function dibujarHojas() {
-            ctx.beginPath();
-            ctx.ellipse(180, 300, 40, 20, Math.PI / 4, 0, 2 * Math.PI); // Hoja izquierda
-            ctx.ellipse(220, 350, 40, 20, -Math.PI / 4, 0, 2 * Math.PI); // Hoja derecha
-            ctx.fillStyle = "#228B22"; // Color verde de las hojas
-            ctx.fill();
-            ctx.closePath();
-        }
-
-        // Función principal para dibujar el girasol
-        function dibujarGirasol() {
-            dibujarCentro();
-            dibujarPetalos();
-            dibujarTallo();
-            dibujarHojas();
-        }
-
-        // Dibujar el girasol cuando cargue la página
-        window.onload = dibujarGirasol;
+        // Agregar el enlace dentro del contenedor
+        document.getElementById('contenedor').appendChild(link);
     </script>
+
 </body>
 </html>
